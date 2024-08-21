@@ -130,40 +130,44 @@ function initGame() {
     createSpikes();
     handleInput();
 
-    // addTestSquare();
     gameLoop();
+    debug();
 
 }
 
-function addTestSquare() {
+// if key "g" is pressed, run the debug function
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'g') {
+        debug();
+    }
+});
+
+const debugConfig = {
+    isDebugging: false,
+    showCoordinates: false,
+    showSize: false,
+}
 
 
-    // add a div that can be draggable using the mouse
-    const draggable = document.createElement('div');
-    draggable.classList.add('draggable');
-    draggable.style.position = 'absolute';
-    draggable.style.width = '50px';
-    draggable.style.height = '50px';
-    draggable.style.backgroundColor = 'red';
-    draggable.style.left = '0px';
-    draggable.style.top = '0px';
-    game.appendChild(draggable);
+function debug() {
+    const debugSection = document.querySelector('.debug');
+    const platformButton = document.getElementById("add-platform");
+    const showCoordinatesButton = document.getElementById("show-coordinates");
+    const showSizeButton = document.getElementById("show-size");
+    
+    
+    debugSection.style.display = 'flex';
+    platformButton.addEventListener("click", addNewPlatform);
+    showCoordinatesButton.addEventListener("click", showPlatformCoordinates);
+    showSizeButton.addEventListener("click", showPlatformSize);
 
-    // make the div draggable only when mouse is down
-    let isMouseDown = false;
-    draggable.addEventListener('mousedown', () => isMouseDown = true);
-    draggable.addEventListener('mouseup', () => isMouseDown = false);
-    game.addEventListener('mousemove', (e) => {
-        if(isMouseDown) {
-            draggable.style.left = `${e.clientX - game.offsetLeft - 10}px`;
-            draggable.style.top = `${e.clientY - game.offsetTop - 10}px`;
+    if(!debugConfig.isDebugging) {
+        debugConfig.isDebugging = true;
 
-            // set the x value into input #test-x
-            document.getElementById("test-x").value = e.clientX - game.offsetLeft - 10;
-            document.getElementById("test-y").value = e.clientY - game.offsetTop - 10;
-        }
-    });
-
+    } else {
+        document.querySelector('.debug').style.display = 'none';
+        debugConfig.isDebugging = false;
+    }
 }
 
 initGame();

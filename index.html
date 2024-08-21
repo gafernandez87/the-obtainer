@@ -7,11 +7,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div style="position: absolute; left: 0; top: 0">
-        <input id="test-x" />
-        <input id="test-y" />
-    </div>
     <div class="game-container">
+        <div class="debug" style="display: none;">
+            <h4>DEBUG</h4>
+            <div>
+                <label for="">Agregar Plataforma</label>
+                <input id="new-platform-width" placeholder="width" value="100"/>
+                <input id="new-platform-height" placeholder="height"  value="100" />
+                <button id="add-platform">Agregar</button>
+            </div>
+            <button id="show-coordinates">Ver coordenadas</button>
+            <button id="show-size">Ver medidas</button>
+        </div>
         <div id="game">
             <h3 id="timer">Tiempo de juego: <b>00:00:00</b></h3>
             <div id="player"></div>

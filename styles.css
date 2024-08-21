@@ -15,11 +15,42 @@ body {
     gap: 5px;
 }
 
-.achievement-container {
+.achievement-container, .debug {
     background-color: #f1f1f1;
     width: 250px;
     height: 600px;
     text-align: center;
+}
+
+.debug {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 10px;
+}
+
+.debug div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.debug button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.debug button:hover {
+    background-color: #397e3c;
+}
+
+
+.debug input {
+    padding: 10px;
+    border: 1px solid #ccc;
 }
 
 #game {
@@ -28,7 +59,6 @@ body {
     height: 600px;
     background-color: #222;
     overflow: hidden;
-    border: 2px solid #000;
 }
 
 #player {
