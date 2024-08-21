@@ -130,7 +130,7 @@ function initGame() {
     createSpikes();
     handleInput();
 
-    addTestSquare();
+    // addTestSquare();
     gameLoop();
 
 }
