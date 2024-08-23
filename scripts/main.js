@@ -13,6 +13,13 @@ const keys = {
     ArrowUp: false
 };
 
+const debugConfig = {
+    isDebugging: false,
+    showCoordinates: false,
+    showSize: false,
+}
+
+
 // Manejar la entrada del teclado
 function handleInput() {
     document.addEventListener('keydown', (e) => {
@@ -61,26 +68,50 @@ function updateVerticalPosition() {
     velocityY += gravity;
     player.style.top = `${player.offsetTop + velocityY}px`;
 
-    handlePlatformCollisions();
     enforceVerticalBounds();
-    checkForWin();
 }
 
 // Manejar colisiones con las plataformas
 function handlePlatformCollisions() {
     const platforms = document.getElementsByClassName('platform');
+    const updatedPlayer  = document.getElementById('player');
+    const pLeft = updatedPlayer.offsetLeft;
+    const pRight = updatedPlayer.offsetLeft + updatedPlayer.offsetWidth;
+    const pBottom = updatedPlayer.offsetTop + updatedPlayer.offsetHeight;
+    
     for (let platform of platforms) {
         if (
-            player.offsetLeft < platform.offsetLeft + platform.offsetWidth &&
-            player.offsetLeft + player.offsetWidth > platform.offsetLeft &&
-            player.offsetTop + player.offsetHeight > platform.offsetTop &&
-            player.offsetTop + player.offsetHeight < platform.offsetTop + platform.offsetHeight &&
-            velocityY > 0
+            velocityY > 0 &&
+            pLeft < (platform.offsetLeft + platform.offsetWidth -10) &&
+            (pRight - 10) > platform.offsetLeft
+            && platform.offsetTop - pBottom < 3
+            && player.offsetTop <= platform.offsetTop + platform.offsetHeight
         ) {
             velocityY = 0;
             isJumping = false;
-            player.style.top = `${platform.offsetTop - player.offsetHeight}px`;
+            player.style.top = `${platform.offsetTop - player.offsetHeight - 1}px`;
         }
+
+        // Add horizontal collision detection right
+        if(
+            velocityX > 0
+            && pRight > platform.offsetLeft && pRight < platform.offsetLeft + platform.offsetWidth
+            && pBottom-5 > platform.offsetTop
+            && player.offsetTop < platform.offsetTop + platform.offsetHeight
+        ) {
+            player.style.left = `${platform.offsetLeft - player.offsetWidth}px`;
+        }
+
+        // add horizontal collision detection left
+        if(
+            velocityX < 0
+            && pLeft < platform.offsetLeft + platform.offsetWidth && pLeft > platform.offsetLeft
+            && (pBottom-5) > platform.offsetTop
+            && player.offsetTop < platform.offsetTop + platform.offsetHeight
+        ) {
+            player.style.left = `${platform.offsetLeft + platform.offsetWidth}px`;
+        }
+
     }
 }
 
@@ -91,20 +122,6 @@ function enforceVerticalBounds() {
         velocityY = 0;
         isJumping = false;
     }
-}
-
-// Verificar si el jugador ha tocado el objetivo
-function checkForWin() {
-    // const goal = document.getElementById('goal');
-    // if (
-    //     player.offsetLeft < goal.offsetLeft + goal.offsetWidth &&
-    //     player.offsetLeft + player.offsetWidth > goal.offsetLeft &&
-    //     player.offsetTop < goal.offsetTop + goal.offsetHeight &&
-    //     player.offsetTop + player.offsetHeight > goal.offsetTop
-    // ) {
-    //     alert('¡Has ganado!');
-    //     resetGame();
-    // }
 }
 
 // Restablecer el juego después de ganar
@@ -121,8 +138,11 @@ function gameLoop() {
     updateHorizontalPosition();
     updateVerticalPosition();
     checkAchievementCollision();
+    handlePlatformCollisions();
+    checkForWin();
     requestAnimationFrame(gameLoop);
 }
+
 
 // Inicializar el juego
 function initGame() {
@@ -132,21 +152,18 @@ function initGame() {
 
     gameLoop();
     debug();
-
 }
 
+initGame();
+
+
+/// TEST CODE< DELETE LATER
 // if key "g" is pressed, run the debug function
 document.addEventListener('keydown', (e) => {
     if (e.key === 'g') {
         debug();
     }
 });
-
-const debugConfig = {
-    isDebugging: false,
-    showCoordinates: false,
-    showSize: false,
-}
 
 
 function debug() {
@@ -170,4 +187,16 @@ function debug() {
     }
 }
 
-initGame();
+function log(data) {
+    // print data in textarea without overriding with id log
+    const log = document.getElementById('log');
+
+    const newData = JSON.stringify(data);
+    
+    //only print if the current data is different than the last line printed
+    if(log.value.trim() !== '' && log.value.trim().split('\n').pop() === newData) return;
+    log.value += newData + '\n';
+
+    // scroll to the bottom of the textarea
+    log.scrollTop = log.scrollHeight;
+}

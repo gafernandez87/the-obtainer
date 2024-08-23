@@ -1,10 +1,10 @@
 // Configuración de plataformas para un mapa más grande y desafiante
 const platformData = [
-    { left: 0, top: 500, height: 100, width: 100 },
-    { left: 200, top: 450, height: 20, width: 100 },
-    { left: 900, top: 540, height: 60, width: 100},
-    { left: 300, top: 500, height: 20, width: 100, move: 'v', from: 200, to: 500, speed: 200 },
-    { left: 450, top: 500, height: 20, width: 100, move: 'v', from: 0, to: 200, speed: 700 },
+    { left: 0, bottom: 0, height: 350, width: 100 },
+    { left: 300, bottom: 0, height: 500, width: 100},
+    { left: 180, bottom: 20, height: 20, width: 100, move: 'v', from: 20, to: 800, speed: 900 },
+    // { left: 300, top: 500, height: 20, width: 100, move: 'v', from: 200, to: 500, speed: 200 },
+    // { left: 450, top: 500, height: 20, width: 100, move: 'v', from: 0, to: 200, speed: 700 },
 ];
 
 // Crear plataformas dinámicamente
@@ -13,7 +13,7 @@ function createPlatforms() {
         const platform = document.createElement('div');
         platform.classList.add('platform');
         platform.style.left = `${data.left}px`;
-        platform.style.top = `${data.top}px`;
+        platform.style.bottom = `${data.bottom}px`;
         platform.style.height = `${data.height}px`;
         platform.style.width = `${data.width}px`;
         game.appendChild(platform);
@@ -29,10 +29,10 @@ function createPlatforms() {
                     platform.style.left = `${data.left}px`;
                 }
                 if(data.move === 'v'){
-                    if(data.top >= data.to) direction = -1;
-                    if(data.top <= data.from) direction = 1;
-                    data.top += direction;
-                    platform.style.top = `${data.top}px`;
+                    if(data.bottom >= data.to) direction = -1;
+                    if(data.bottom <= data.from) direction = 1;
+                    data.bottom += direction;
+                    platform.style.bottom = `${data.bottom}px`;
                 }
             }, data.speed / 60);
         }

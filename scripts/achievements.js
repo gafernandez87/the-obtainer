@@ -117,3 +117,9 @@ function drawAchievementList() {
     });
     
 }
+
+function checkForWin() {
+    if (achievementList.every(a => a.achieved)) {
+        alert('¡Has ganado!');
+    }
+}
