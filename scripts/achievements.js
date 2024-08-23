@@ -3,7 +3,7 @@ let diedCounter = 0;
 let timer = 0;
 
 const achievementList = [
-    { id: 1, title: 'Hola mundo!', description: 'A plena vista', achieved: false , left: 620, top: 570, height: 10, width: 10, 
+    { id: 1, title: 'Hola mundo!', description: 'A plena vista', achieved: false, left: 620, top: 570, height: 10, width: 10, 
         check: function({player}, box){
             return this.achieved ||
                 player.top < box.bottom && player.right > box.left && player.left < box.right;

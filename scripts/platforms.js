@@ -1,10 +1,20 @@
 // Configuración de plataformas para un mapa más grande y desafiante
 const platformData = [
-    { left: 0, bottom: 0, height: 350, width: 100 },
-    { left: 300, bottom: 0, height: 500, width: 100},
-    { left: 180, bottom: 20, height: 20, width: 100, move: 'v', from: 20, to: 800, speed: 900 },
-    // { left: 300, top: 500, height: 20, width: 100, move: 'v', from: 200, to: 500, speed: 200 },
-    // { left: 450, top: 500, height: 20, width: 100, move: 'v', from: 0, to: 200, speed: 700 },
+    { left: 0, bottom: 0, height: 70, width: 100 },
+    { left: 320, bottom: 0, height: 100, width: 100},
+    { left: 160, bottom: 130, height: 20, width: 90},
+    { left: 720, bottom: 0, height: 100, width: 100},
+    { left: 450, bottom: 130, height: 20, width: 100, move: 'h', from: 450, to: 600, speed: 600 },
+    
+    { left: 960, bottom: 60, height: 10, width: 40},
+    { left: 960, bottom: 130, height: 10, width: 40},
+    { left: 960, bottom: 200, height: 10, width: 40},
+    { left: 960, bottom: 270, height: 10, width: 40},
+    
+    
+    { left: 440, bottom: 300, height: 20, width: 440},
+    { left: 0, bottom: 300, height: 20, width: 330},
+
 ];
 
 // Crear plataformas dinámicamente

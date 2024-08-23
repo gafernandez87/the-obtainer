@@ -80,6 +80,8 @@ function handlePlatformCollisions() {
     const pBottom = updatedPlayer.offsetTop + updatedPlayer.offsetHeight;
     
     for (let platform of platforms) {
+
+        // Vertical, de arriba hacia abajo
         if (
             velocityY > 0 &&
             pLeft < (platform.offsetLeft + platform.offsetWidth -10) &&
@@ -90,6 +92,19 @@ function handlePlatformCollisions() {
             velocityY = 0;
             isJumping = false;
             player.style.top = `${platform.offsetTop - player.offsetHeight - 1}px`;
+        }
+
+        // Vertical, de abajo hacia arriba
+        if (
+            velocityY < 0 &&
+            pLeft < (platform.offsetLeft + platform.offsetWidth -10) &&
+            (pRight - 10) > platform.offsetLeft
+            && pBottom >= platform.offsetTop + platform.offsetHeight
+            && player.offsetTop <= platform.offsetTop + platform.offsetHeight
+        ) {
+            velocityY = 0;
+            isJumping = false;
+            player.style.top = `${platform.offsetTop + platform.offsetHeight + 1}px`;
         }
 
         // Add horizontal collision detection right
@@ -148,6 +163,7 @@ function gameLoop() {
 function initGame() {
     createPlatforms();
     createSpikes();
+    createTokens();
     handleInput();
 
     gameLoop();

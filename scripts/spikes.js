@@ -1,7 +1,23 @@
 // Configuración de plataformas para un mapa más grande y desafiante
 const spikesData = [
-    { left: 415, bottom: 0 },
+    { left: 280, bottom: 0 },
+    { left: 300, bottom: 0 },
 ];
+
+function addSpikesToList(){
+    let from = 240;
+    for(let i= 0; i < 4; i++){
+        spikesData.push({left: from, bottom: 0});
+        from += 20;
+    }
+
+    from = 420;
+    for(let i= 0; i < 15; i++){
+        spikesData.push({left: from, bottom: 0});
+        from += 20;
+    }
+}
+addSpikesToList();
 
 // Crear plataformas dinámicamente
 function createSpikes() {
