@@ -8,30 +8,39 @@
 </head>
 <body>
     <div class="game-container">
-        <!-- <textarea id="log"></textarea> -->
-        <div class="debug" style="display: none;">
-            <h4>DEBUG</h4>
-            <div>
-                <label for="">Agregar Plataforma</label>
-                <input id="new-platform-width" placeholder="width" value="100"/>
-                <input id="new-platform-height" placeholder="height"  value="100" />
-                <button id="add-platform">Agregar</button>
+        <div class="header">
+            <h3 id="timer">
+                <span>Nivel <b id="current-level">1</b> - </span>
+                <span>Tiempo de juego: <b id="game-time">00:00</b></span>
+            </h3>
+        </div>
+        <div class="body">
+            <!-- <textarea id="log"></textarea> -->
+            <div class="debug" style="display: none;">
+                <h4>DEBUG</h4>
+                <div>
+                    <label for="">Agregar Plataforma</label>
+                    <input id="new-platform-width" placeholder="width" value="100"/>
+                    <input id="new-platform-height" placeholder="height"  value="100" />
+                    <button id="add-platform">Agregar</button>
+                </div>
+                <button id="show-coordinates">Ver coordenadas</button>
+                <button id="show-size">Ver medidas</button>
             </div>
-            <button id="show-coordinates">Ver coordenadas</button>
-            <button id="show-size">Ver medidas</button>
-        </div>
-        <div id="game">
-            <h3 id="timer">Tiempo de juego: <b>00:00:00</b></h3>
-            <div id="player"></div>
-        </div>
-        <div class="achievement-container">
-            <h4>Logros</h4>
+            <div id="game">
+                <div id="player"></div>
+            </div>
+            <div class="achievement-container">
+                <h4>Logros</h4>
+            </div>
         </div>
     </div>
+
     <script src="scripts/achievements.js"></script>
     <script src="scripts/tokens.js"></script>
     <script src="scripts/spikes.js"></script>
     <script src="scripts/platforms.js"></script>
+    <script src="scripts/levels.js"></script>
     <script src="scripts/main.js"></script>
 </body>
 </html>

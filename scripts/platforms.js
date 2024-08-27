@@ -1,5 +1,32 @@
 // Configuración de plataformas para un mapa más grande y desafiante
-const platformData = [
+const platformsLevel1 = [
+    { left: 0, bottom: 0, height: 70, width: 100 },
+    { left: 160, bottom: 0, height: 100, width: 90},
+    { left: 350, bottom: 0, height: 100, width: 100},
+    { left: 330, bottom: 0, height: 20, width: 20},
+    { left: 720, bottom: 0, height: 100, width: 100},
+    { left: 480, bottom: 130, height: 20, width: 200 },
+    { left: 700, bottom: 0, height: 20, width: 20},
+    
+    { left: 960, bottom: 60, height: 10, width: 40},
+    { left: 960, bottom: 130, height: 10, width: 40},
+    { left: 960, bottom: 200, height: 10, width: 40},
+    { left: 960, bottom: 270, height: 10, width: 40},
+    
+    
+    { left: 0, bottom: 300, height: 20, width: 880},
+
+    { left: 0, bottom: 500, height: 40, width: 280},
+
+    { left: 0, bottom: 320, height: 30, width: 30},
+    { left: 80, bottom: 390, height: 30, width: 230},
+    { left: 350, bottom: 390, height: 30, width: 230},
+    { left: 340, bottom: 500, height: 20, width: 100},
+    { left: 580, bottom: 390, height: 180, width: 20},
+    { left: 530, bottom: 470, height: 20, width: 50},
+];
+
+const platformsLevel2 = [
     { left: 0, bottom: 0, height: 70, width: 100 },
     { left: 320, bottom: 0, height: 100, width: 100},
     { left: 160, bottom: 130, height: 20, width: 90},
@@ -15,11 +42,17 @@ const platformData = [
     { left: 440, bottom: 300, height: 20, width: 440},
     { left: 0, bottom: 300, height: 20, width: 330},
 
+    { left: 0, bottom: 500, height: 60, width: 330}
 ];
 
-// Crear plataformas dinámicamente
-function createPlatforms() {
-    platformData.forEach(data => {
+const platformIntervals = [];
+
+function drawPlatforms(platforms) {
+    document.querySelectorAll('.platform').forEach(a => a.remove());
+
+    platformIntervals.forEach(a => clearInterval(a));
+
+    platforms.forEach(data => {
         const platform = document.createElement('div');
         platform.classList.add('platform');
         platform.style.left = `${data.left}px`;
@@ -31,7 +64,7 @@ function createPlatforms() {
         if(data.move){ 
             // make the platform move horizontally if move === h or vertically if move === v using from and to
             let direction = 1;
-            setInterval(() => {
+            const intervalID = setInterval(() => {
                 if(data.move === 'h'){
                     if(data.left >= data.to) direction = -1;
                     if(data.left <= data.from) direction = 1;
@@ -45,6 +78,8 @@ function createPlatforms() {
                     platform.style.bottom = `${data.bottom}px`;
                 }
             }, data.speed / 60);
+
+            platformIntervals.push(intervalID);
         }
 
     });

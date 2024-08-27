@@ -1,14 +1,8 @@
 let jumpCounter = 0;
 let diedCounter = 0;
-let timer = 0;
+let timer = 1;
 
 const achievementList = [
-    { id: 1, title: 'Hola mundo!', description: 'A plena vista', achieved: false, left: 620, top: 570, height: 10, width: 10, 
-        check: function({player}, box){
-            return this.achieved ||
-                player.top < box.bottom && player.right > box.left && player.left < box.right;
-        } 
-    },
     { id: 2, title: 'Saltar', description: 'Saltar 1 vez', achieved: false , left: 0, top: 0, check: () => jumpCounter >= 1},
     { id: 3, title: 'Saltarín', description: 'Saltar 10 veces', achieved: false , left: 0, top: 0, check: () => jumpCounter >= 10},
     { id: 4, title: 'Resorte', description: 'Saltar 100 veces', achieved: false , left: 0, top: 0, check: () => jumpCounter >= 100},
@@ -39,7 +33,8 @@ const achievementList = [
             player.bottom === game.bottom && player.right === (game.right - 30)
         } 
     },
-    { id: 11, title: 'Upss', description: 'Muere 1 vez', achieved: false , left: 0, top: 0, check: ()=> diedCounter > 0},
+    { id: 11, title: 'Upss', description: 'Muere 1 vez', achieved: false , left: 0, top: 0, check: () => diedCounter > 0},
+    { id: 12, title: 'Level up', description: 'Pasar al nivel 2', achieved: false , left: 0, top: 0, check: () => {}},
 
 ];
 
@@ -50,7 +45,9 @@ setInterval(() => {
     const hours = Math.floor(timer / 3600);
     const minutes = Math.floor((timer % 3600) / 60);
     const seconds = timer % 60;
-    document.querySelector('#timer b').textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    const hoursText = hours ? `${hours.toString().padStart(2, '0')}:` : '';
+
+    document.querySelector('#game-time').textContent = `${hoursText}${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     
     timer++;
 }, 1000);

@@ -73,6 +73,7 @@ function updateVerticalPosition() {
 
 // Manejar colisiones con las plataformas
 function handlePlatformCollisions() {
+    let isColliding = false;
     const platforms = document.getElementsByClassName('platform');
     const updatedPlayer  = document.getElementById('player');
     const pLeft = updatedPlayer.offsetLeft;
@@ -96,19 +97,21 @@ function handlePlatformCollisions() {
 
         // Vertical, de abajo hacia arriba
         if (
+            !isColliding &&
             velocityY < 0 &&
-            pLeft < (platform.offsetLeft + platform.offsetWidth -10) &&
-            (pRight - 10) > platform.offsetLeft
-            && pBottom >= platform.offsetTop + platform.offsetHeight
-            && player.offsetTop <= platform.offsetTop + platform.offsetHeight
+            pLeft < (platform.offsetLeft + platform.offsetWidth - 10) &&
+            (pRight - 10) > platform.offsetLeft &&
+            player.offsetTop <= platform.offsetTop + platform.offsetHeight + 5 && // Tolerancia de 5px
+            player.offsetTop >= platform.offsetTop + platform.offsetHeight
         ) {
+            isColliding = true;
             velocityY = 0;
-            isJumping = false;
-            player.style.top = `${platform.offsetTop + platform.offsetHeight + 1}px`;
+            player.style.top = `${platform.offsetTop + platform.offsetHeight + 1}px`; // Desplaza al jugador hacia abajo
         }
 
         // Add horizontal collision detection right
         if(
+            !isColliding &&
             velocityX > 0
             && pRight > platform.offsetLeft && pRight < platform.offsetLeft + platform.offsetWidth
             && pBottom-5 > platform.offsetTop
@@ -119,6 +122,7 @@ function handlePlatformCollisions() {
 
         // add horizontal collision detection left
         if(
+            !isColliding &&
             velocityX < 0
             && pLeft < platform.offsetLeft + platform.offsetWidth && pLeft > platform.offsetLeft
             && (pBottom-5) > platform.offsetTop
@@ -161,13 +165,11 @@ function gameLoop() {
 
 // Inicializar el juego
 function initGame() {
-    createPlatforms();
-    createSpikes();
-    createTokens();
+    drawLevel();
     handleInput();
 
     gameLoop();
-    debug();
+    // debug();
 }
 
 initGame();

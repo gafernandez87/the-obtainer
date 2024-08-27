@@ -1,26 +1,31 @@
 // Configuración de plataformas para un mapa más grande y desafiante
-const spikesData = [
-    { left: 280, bottom: 0 },
-    { left: 300, bottom: 0 },
-];
+const spikesLevel2 = [];
 
-function addSpikesToList(){
+const spikeIntervals = [];
+
+function genereateLvl2(){
     let from = 240;
     for(let i= 0; i < 4; i++){
-        spikesData.push({left: from, bottom: 0});
+        spikesLevel2.push({left: from, bottom: 0});
         from += 20;
     }
 
     from = 420;
     for(let i= 0; i < 15; i++){
-        spikesData.push({left: from, bottom: 0});
+        spikesLevel2.push({left: from, bottom: 0});
         from += 20;
     }
+
+    spikesLevel2.push({ left: 280, bottom: 0 });
+    spikesLevel2.push({ left: 300, bottom: 0 });
 }
-addSpikesToList();
+genereateLvl2();
 
 // Crear plataformas dinámicamente
-function createSpikes() {
+function drawSpikes(spikesData) {
+    document.querySelectorAll('.spike').forEach(a => a.remove());
+    spikeIntervals.forEach(a => clearInterval(a));
+
     spikesData.forEach(data => {
         const spike = document.createElement('div');
         spike.classList.add('spike');
@@ -29,18 +34,20 @@ function createSpikes() {
         game.appendChild(spike);
 
         // on player collission, kill the player
-        setInterval(() => {
+        const intervalID = setInterval(() => {
             const playerRect = player.getBoundingClientRect();
             const spikeRect = spike.getBoundingClientRect();
-            if(checkCollision(playerRect, spikeRect)){
+            if(checkSpikeCollision(playerRect, spikeRect)){
                 diedCounter++;
                 resetGame();
             }
         }, 1000 / 60);
+
+        spikeIntervals.push(intervalID);
     });
 }
 
-function checkCollision(rect1, rect2) {
+function checkSpikeCollision(rect1, rect2) {
     return !(rect1.right < rect2.left || 
         rect1.left > rect2.right || 
         rect1.bottom < rect2.top || 
