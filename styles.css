@@ -9,8 +9,49 @@ body {
     background-color: #87CEEB;
 }
 
-.game-container {
+.menu {
     display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 5px;
+    width: 1000px;
+    height: 600px;
+    align-items: center;
+}
+
+.levels {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 800px;
+    gap: 15px;
+}
+
+.level {
+    width: 120px;
+    height: 80px;
+    background-color: #c1c1c1;
+    color: white;
+    border: none;
+    cursor: not-allowed;
+}
+
+.unlocked {
+    background-color: #4CAF50;
+    cursor: pointer;
+}
+
+.unlocked:hover {
+    border: 1px solid #017105;
+    transform: scale(1.1);
+    transition: transform 0.5s;
+}
+
+.game-container {
+    display: none;
+    /* display: flex; */
     flex-direction: column;
     gap: 5px;
 }
@@ -19,7 +60,13 @@ body {
     background-color: white;
     padding: 0 1rem;
     color: black;
-    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header .go-to-menu {
+    cursor: pointer;
 }
 
 .body {
@@ -79,8 +126,8 @@ body {
     width: 30px;
     height: 30px;
     background-color: #f00;
-    left: 440px;
-    bottom: 450px;
+    /* left: 440px;
+    bottom: 450px; */
     left: 120px;
     bottom: 40px;
 }
@@ -88,6 +135,7 @@ body {
 .platform {
     position: absolute;
     background-color: #555;
+    /* filter: drop-shadow(-2px 0px 1px #bcbbbb); */
 }
 
 .achievement {

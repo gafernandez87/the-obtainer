@@ -42,7 +42,7 @@ const platformsLevel2 = [
     { left: 440, bottom: 300, height: 20, width: 440},
     { left: 0, bottom: 300, height: 20, width: 330},
 
-    { left: 0, bottom: 500, height: 60, width: 330}
+    { left: 0, bottom: 500, height: 20, width: 330}
 ];
 
 const platformIntervals = [];
@@ -84,6 +84,70 @@ function drawPlatforms(platforms) {
 
     });
 }
+
+// Manejar colisiones con las plataformas
+function handlePlatformCollisions() {
+    let isColliding = false;
+    const platforms = document.getElementsByClassName('platform');
+    const updatedPlayer  = document.getElementById('player');
+    const pLeft = updatedPlayer.offsetLeft;
+    const pRight = updatedPlayer.offsetLeft + updatedPlayer.offsetWidth;
+    const pBottom = updatedPlayer.offsetTop + updatedPlayer.offsetHeight;
+    
+    for (let platform of platforms) {
+
+        // Vertical, de arriba hacia abajo
+        if (
+            velocityY > 0 &&
+            pLeft < (platform.offsetLeft + platform.offsetWidth -10) &&
+            (pRight - 10) > platform.offsetLeft
+            && platform.offsetTop - pBottom < 3
+            && player.offsetTop <= platform.offsetTop + platform.offsetHeight
+        ) {
+            velocityY = 0;
+            isJumping = false;
+            player.style.top = `${platform.offsetTop - player.offsetHeight - 1}px`;
+        }
+
+        // Vertical, de abajo hacia arriba
+        if (
+            !isColliding &&
+            velocityY < 0 &&
+            pLeft < (platform.offsetLeft + platform.offsetWidth - 10) &&
+            (pRight - 10) > platform.offsetLeft &&
+            player.offsetTop <= platform.offsetTop + platform.offsetHeight + 5 && // Tolerancia de 5px
+            player.offsetTop >= platform.offsetTop + platform.offsetHeight
+        ) {
+            isColliding = true;
+            velocityY = 0;
+            player.style.top = `${platform.offsetTop + platform.offsetHeight + 1}px`; // Desplaza al jugador hacia abajo
+        }
+
+        // Add horizontal collision detection right
+        if(
+            !isColliding &&
+            velocityX > 0
+            && pRight > platform.offsetLeft && pRight < platform.offsetLeft + platform.offsetWidth
+            && pBottom-5 > platform.offsetTop
+            && player.offsetTop < platform.offsetTop + platform.offsetHeight
+        ) {
+            player.style.left = `${platform.offsetLeft - player.offsetWidth}px`;
+        }
+
+        // add horizontal collision detection left
+        if(
+            !isColliding &&
+            velocityX < 0
+            && pLeft < platform.offsetLeft + platform.offsetWidth && pLeft > platform.offsetLeft
+            && (pBottom-5) > platform.offsetTop
+            && player.offsetTop < platform.offsetTop + platform.offsetHeight
+        ) {
+            player.style.left = `${platform.offsetLeft + platform.offsetWidth}px`;
+        }
+
+    }
+}
+
 
 function showPlatformCoordinates(){
     // show the coordinates of each platform inside each platform

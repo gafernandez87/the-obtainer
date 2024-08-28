@@ -15,8 +15,8 @@ const tokenIntervals = [];
 function drawTokens(tokens) {
     document.querySelectorAll('.token').forEach(a => a.remove());
     tokenIntervals.forEach(a => clearInterval(a));
-
-    tokens.forEach(data => {
+    
+    tokens.filter(a => !a.collected).forEach(data => {
         const token = document.createElement('div');
         token.classList.add('token');
         token.style.left = `${data.left}px`;
@@ -26,7 +26,7 @@ function drawTokens(tokens) {
         const intervalID = setInterval(() => {
             const tokenRect = token.getBoundingClientRect();
             const playerRect = player.getBoundingClientRect();
-            if(!data.collected && checkTokenCollision(playerRect, tokenRect)){
+            if(gameStatus === 'playing' && !data.collected && checkTokenCollision(playerRect, tokenRect)){
                 data.collected = true;
                 token.remove();
 

@@ -2,11 +2,13 @@ let currentLevel = 1;
 
 const levels = {
     '1': {
+        unlocked: true,
         platforms: platformsLevel1,
         spikes: [],
         tokens: tokensLevel1,
     },
     '2': {
+        unlocked: false,
         platforms: platformsLevel2,
         spikes: spikesLevel2,
         tokens: tokensLevel2,
@@ -37,6 +39,9 @@ function changeLevel(newLevel) {
     achievementList.find(a => a.id === 12).achieved = true;
     currentLevel = newLevel;
     document.getElementById('current-level').innerText = currentLevel;
+
+    levels[currentLevel].unlocked = true;
+    
     resetGame();
     drawLevel();
 }

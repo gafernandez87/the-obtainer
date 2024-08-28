@@ -7,26 +7,34 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="menu">
+        <h1>El coleccionista</h1>
+        <div class="menu-container">
+            <h3>Selecciona un nivel</h3>
+            <div class="levels">
+                <button class="level" data-level="1">Nivel 1</button>
+                <button class="level" data-level="2">Nivel 2</button>
+                <button class="level" data-level="3">Nivel 3</button>
+                <button class="level" data-level="4">Nivel 4</button>
+                <button class="level" data-level="5">Nivel 5</button>
+                <button class="level" data-level="6">Nivel 6</button>
+                <button class="level" data-level="7">Nivel 7</button>
+                <button class="level" data-level="8">Nivel 8</button>
+                <button class="level" data-level="9">Nivel 9</button>
+                <button class="level" data-level="10">Nivel 10</button>
+            </div>
+        </div>
+    </div>
+
     <div class="game-container">
         <div class="header">
             <h3 id="timer">
                 <span>Nivel <b id="current-level">1</b> - </span>
                 <span>Tiempo de juego: <b id="game-time">00:00</b></span>
             </h3>
+            <span class="go-to-menu">Menu</span>
         </div>
         <div class="body">
-            <!-- <textarea id="log"></textarea> -->
-            <div class="debug" style="display: none;">
-                <h4>DEBUG</h4>
-                <div>
-                    <label for="">Agregar Plataforma</label>
-                    <input id="new-platform-width" placeholder="width" value="100"/>
-                    <input id="new-platform-height" placeholder="height"  value="100" />
-                    <button id="add-platform">Agregar</button>
-                </div>
-                <button id="show-coordinates">Ver coordenadas</button>
-                <button id="show-size">Ver medidas</button>
-            </div>
             <div id="game">
                 <div id="player"></div>
             </div>

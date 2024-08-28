@@ -1,11 +1,15 @@
 const player = document.getElementById('player');
 const game = document.getElementById('game');
 
+let gameStatus = 'menu';
+
+let gameLoopId = null;
+
 let velocityX = 0;
 let velocityY = 0;
-let gravity = 0.5;
 let isJumping = false;
-let speed = 3;
+const gravity = 0.5;
+const speed = 3;
 
 const keys = {
     ArrowRight: false,
@@ -71,69 +75,6 @@ function updateVerticalPosition() {
     enforceVerticalBounds();
 }
 
-// Manejar colisiones con las plataformas
-function handlePlatformCollisions() {
-    let isColliding = false;
-    const platforms = document.getElementsByClassName('platform');
-    const updatedPlayer  = document.getElementById('player');
-    const pLeft = updatedPlayer.offsetLeft;
-    const pRight = updatedPlayer.offsetLeft + updatedPlayer.offsetWidth;
-    const pBottom = updatedPlayer.offsetTop + updatedPlayer.offsetHeight;
-    
-    for (let platform of platforms) {
-
-        // Vertical, de arriba hacia abajo
-        if (
-            velocityY > 0 &&
-            pLeft < (platform.offsetLeft + platform.offsetWidth -10) &&
-            (pRight - 10) > platform.offsetLeft
-            && platform.offsetTop - pBottom < 3
-            && player.offsetTop <= platform.offsetTop + platform.offsetHeight
-        ) {
-            velocityY = 0;
-            isJumping = false;
-            player.style.top = `${platform.offsetTop - player.offsetHeight - 1}px`;
-        }
-
-        // Vertical, de abajo hacia arriba
-        if (
-            !isColliding &&
-            velocityY < 0 &&
-            pLeft < (platform.offsetLeft + platform.offsetWidth - 10) &&
-            (pRight - 10) > platform.offsetLeft &&
-            player.offsetTop <= platform.offsetTop + platform.offsetHeight + 5 && // Tolerancia de 5px
-            player.offsetTop >= platform.offsetTop + platform.offsetHeight
-        ) {
-            isColliding = true;
-            velocityY = 0;
-            player.style.top = `${platform.offsetTop + platform.offsetHeight + 1}px`; // Desplaza al jugador hacia abajo
-        }
-
-        // Add horizontal collision detection right
-        if(
-            !isColliding &&
-            velocityX > 0
-            && pRight > platform.offsetLeft && pRight < platform.offsetLeft + platform.offsetWidth
-            && pBottom-5 > platform.offsetTop
-            && player.offsetTop < platform.offsetTop + platform.offsetHeight
-        ) {
-            player.style.left = `${platform.offsetLeft - player.offsetWidth}px`;
-        }
-
-        // add horizontal collision detection left
-        if(
-            !isColliding &&
-            velocityX < 0
-            && pLeft < platform.offsetLeft + platform.offsetWidth && pLeft > platform.offsetLeft
-            && (pBottom-5) > platform.offsetTop
-            && player.offsetTop < platform.offsetTop + platform.offsetHeight
-        ) {
-            player.style.left = `${platform.offsetLeft + platform.offsetWidth}px`;
-        }
-
-    }
-}
-
 // Evitar que el jugador caiga fuera del juego
 function enforceVerticalBounds() {
     if (player.offsetTop + player.offsetHeight > game.clientHeight) {
@@ -145,8 +86,8 @@ function enforceVerticalBounds() {
 
 // Restablecer el juego después de ganar
 function resetGame() {
-    player.style.left = '130px';
-    player.style.top = '550px';
+    player.style.left = '120px';
+    player.style.bottom = '40px';
     velocityX = 0;
     velocityY = 0;
     isJumping = false;
@@ -159,12 +100,12 @@ function gameLoop() {
     checkAchievementCollision();
     handlePlatformCollisions();
     checkForWin();
-    requestAnimationFrame(gameLoop);
+    gameLoopId = requestAnimationFrame(gameLoop);
 }
-
 
 // Inicializar el juego
 function initGame() {
+    document.querySelector('.game-container').style.display = 'flex';
     drawLevel();
     handleInput();
 
@@ -172,49 +113,41 @@ function initGame() {
     // debug();
 }
 
-initGame();
+// initGame();
 
+function setupMenu() {
+    //check each level in the levels array and add class unlocked in element data-level="1"
+    Object.keys(levels).forEach((key, index) => {
+        const level = levels[key];
+        const levelElement = document.querySelector(`[data-level="${index + 1}"]`);
+        level.unlocked && levelElement.classList.add('unlocked');
+        levelElement.addEventListener('click', (e) => {
+            const levelClicked = e.target.dataset.level;
+            if(levels[levelClicked].unlocked) {
+                currentLevel = index + 1;
+                document.querySelector('.menu').style.display = 'none';
+                gameStatus = 'playing';
+                initGame();
+            }
+        });
+    });
+}
 
-/// TEST CODE< DELETE LATER
-// if key "g" is pressed, run the debug function
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'g') {
-        debug();
-    }
+function updateMenu(){
+    Object.keys(levels).forEach((key, index) => {
+        const level = levels[key];
+        const levelElement = document.querySelector(`[data-level="${index + 1}"]`);
+        level.unlocked && levelElement.classList.add('unlocked');
+    });
+}
+
+document.querySelector('.go-to-menu').addEventListener('click', () => {
+    document.querySelector('.menu').style.display = 'flex';
+    document.querySelector('.game-container').style.display = 'none';
+    gameStatus = 'menu';
+    gameLoopId && cancelAnimationFrame(gameLoopId);
+    resetGame();
+    updateMenu();
 });
 
-
-function debug() {
-    const debugSection = document.querySelector('.debug');
-    const platformButton = document.getElementById("add-platform");
-    const showCoordinatesButton = document.getElementById("show-coordinates");
-    const showSizeButton = document.getElementById("show-size");
-    
-    
-    debugSection.style.display = 'flex';
-    platformButton.addEventListener("click", addNewPlatform);
-    showCoordinatesButton.addEventListener("click", showPlatformCoordinates);
-    showSizeButton.addEventListener("click", showPlatformSize);
-
-    if(!debugConfig.isDebugging) {
-        debugConfig.isDebugging = true;
-
-    } else {
-        document.querySelector('.debug').style.display = 'none';
-        debugConfig.isDebugging = false;
-    }
-}
-
-function log(data) {
-    // print data in textarea without overriding with id log
-    const log = document.getElementById('log');
-
-    const newData = JSON.stringify(data);
-    
-    //only print if the current data is different than the last line printed
-    if(log.value.trim() !== '' && log.value.trim().split('\n').pop() === newData) return;
-    log.value += newData + '\n';
-
-    // scroll to the bottom of the textarea
-    log.scrollTop = log.scrollHeight;
-}
+setupMenu();
