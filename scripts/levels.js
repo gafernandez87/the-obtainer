@@ -6,6 +6,7 @@ const levels = {
         platforms: platformsLevel1,
         spikes: [],
         tokens: tokensLevel1,
+        deco: decoLevel1,
     },
     '2': {
         unlocked: false,
@@ -25,6 +26,9 @@ function drawLevel() {
 
     const tokens = levels[currentLevel].tokens;
     drawTokens(tokens);
+
+    const deco = levels[currentLevel].deco;
+    drawDeco(deco);
 }
 
 function tokenCollected() {

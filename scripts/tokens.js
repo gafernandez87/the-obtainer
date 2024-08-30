@@ -1,10 +1,10 @@
 // Configuración de plataformas para un mapa más grande y desafiante
 const tokensLevel1 = [
-    { left: 10, bottom: 570, collected: false },
-    { left: 40, bottom: 140, collected: false },
-    { left: 570, bottom: 180, collected: false },
-    { left: 700, bottom: 400, collected: false },
-    { left: 545, bottom: 500, collected: false },
+    // { left: 10, bottom: 570, collected: false, kanji: '人' },
+    { left: 40, bottom: 100, collected: false, kanji: '人' },
+    { left: 570, bottom: 180, collected: false, kanji: '私' },
+    // { left: 700, bottom: 400, collected: false },
+    // { left: 545, bottom: 500, collected: false },
 ];
 
 const tokensLevel2 = [];
@@ -21,6 +21,7 @@ function drawTokens(tokens) {
         token.classList.add('token');
         token.style.left = `${data.left}px`;
         token.style.bottom = `${data.bottom}px`;
+        token.setAttribute('data-kanji', data.kanji);
         game.appendChild(token);
         
         const intervalID = setInterval(() => {

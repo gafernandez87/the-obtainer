@@ -17,12 +17,6 @@ const keys = {
     ArrowUp: false
 };
 
-const debugConfig = {
-    isDebugging: false,
-    showCoordinates: false,
-    showSize: false,
-}
-
 
 // Manejar la entrada del teclado
 function handleInput() {
@@ -110,10 +104,8 @@ function initGame() {
     handleInput();
 
     gameLoop();
-    // debug();
 }
 
-// initGame();
 
 function setupMenu() {
     //check each level in the levels array and add class unlocked in element data-level="1"
@@ -151,3 +143,8 @@ document.querySelector('.go-to-menu').addEventListener('click', () => {
 });
 
 setupMenu();
+
+
+setTimeout(() => {
+    document.querySelector(`[data-level="1"]`).click();
+}, 200);

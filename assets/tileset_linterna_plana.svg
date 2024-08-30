@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 492.9 472">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #7a5725;
+      }
+
+      .cls-2 {
+        font-family: ZenMaruGothic-Regular, 'Zen Maru Gothic';
+        font-size: 27.33px;
+        glyph-orientation-vertical: 0deg;
+        text-orientation: upright;
+        writing-mode: tb;
+      }
+
+      .cls-2, .cls-3 {
+        fill: #827b65;
+      }
+
+      .cls-4 {
+        fill: #a89b8a;
+      }
+
+      .cls-5 {
+        fill: none;
+      }
+
+      .cls-6 {
+        fill: url(#Degradado_sin_nombre_176);
+        opacity: .3;
+      }
+
+      .cls-7 {
+        fill: #bab1a4;
+      }
+
+      .cls-8 {
+        fill: #5b5b4d;
+      }
+
+      .cls-9 {
+        fill: #978e7f;
+      }
+    </style>
+    <radialGradient id="Degradado_sin_nombre_176" data-name="Degradado sin nombre 176" cx="299.04" cy="79.45" fx="299.04" fy="79.45" r="68.05" gradientTransform="translate(-131.59 101.27) scale(1.3 1.02)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#edbf58"/>
+      <stop offset=".2" stop-color="#f0c967"/>
+      <stop offset=".46" stop-color="#f7db81"/>
+      <stop offset=".48" stop-color="#f7db81" stop-opacity=".94"/>
+      <stop offset=".59" stop-color="#f7db81" stop-opacity=".66"/>
+      <stop offset=".7" stop-color="#f7db81" stop-opacity=".43"/>
+      <stop offset=".8" stop-color="#f7db81" stop-opacity=".24"/>
+      <stop offset=".88" stop-color="#f7db81" stop-opacity=".11"/>
+      <stop offset=".95" stop-color="#f7db81" stop-opacity=".03"/>
+      <stop offset="1" stop-color="#f7db81" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <path class="cls-8" d="M301.12,404.4h-90.05c.28-2.81,2.59-5.44,6.4-7.7v-12.54c1.33-3.11,2.63-6.58,3.87-10.39h0s0-.04,0-.05c7.11-21.86,12.45-54.65,14.07-91.46.54-12.32.63-24.21.31-35.44h-1.25v-13.79h43.22v13.79h-1.25c-.32,11.22-.23,23.12.31,35.44,1.62,36.81,6.96,69.6,14.07,91.46,1.52,4.69,3.13,8.88,4.8,12.5v11.05c3.26,2.13,5.21,4.55,5.48,7.12Z"/>
+  <path class="cls-3" d="M210.13,141.53v67.59h90.12v-67.59h-90.12ZM289.21,200.85h-68.05v-51.04h68.05v51.04Z"/>
+  <path class="cls-1" d="M221.16,149.81v51.04h68.05v-51.04h-68.05ZM280.88,194.6h-51.39v-38.54h51.39v38.54Z"/>
+  <rect class="cls-1" x="250.13" y="151.19" width="10.58" height="48.74"/>
+  <rect class="cls-1" x="250.13" y="147.28" width="10.58" height="56.56" transform="translate(79.86 430.98) rotate(-90)"/>
+  <path class="cls-8" d="M259.7,228.21h-62.82c33.57,2.07,36.79,5.52,36.79,5.52h43.04s3.22-3.45,36.79-5.52h-53.8Z"/>
+  <path class="cls-3" d="M272.9,79.75h-35.43c4.39,4.76,0,8.9,0,8.9h35.43c-4.39-4.76,0-8.9,0-8.9Z"/>
+  <path class="cls-9" d="M304.85,125.9c-13.81,4.58-31.01,7.29-49.66,7.29s-35.85-2.72-49.66-7.29c8.25-19.27,27.38-32.76,49.66-32.76s41.41,13.5,49.66,32.76Z"/>
+  <rect class="cls-9" x="197.71" y="403.17" width="115.87" height="23.91"/>
+  <rect class="cls-4" x="186.68" y="422.5" width="137.94" height="28.46"/>
+  <path class="cls-5" d="M325.54,111.08v9.02c-14.73,7.01-41.43,11.69-71.91,11.69-28.44,0-53.58-4.08-68.79-10.31v-10.4c5.3,3.54,11.97,6.66,19.67,9.21,14.09,4.67,31.65,7.44,50.68,7.44s36.59-2.77,50.68-7.44c7.7-2.55,14.36-5.67,19.67-9.21Z"/>
+  <rect class="cls-9" x="233.12" y="88.19" width="44.14" height="9.66"/>
+  <rect class="cls-7" x="196.79" y="207.75" width="116.79" height="20.69"/>
+  <text class="cls-2" transform="translate(255.54 265.31)"><tspan x="0" y="0">漢字</tspan></text>
+  <path class="cls-7" d="M349.21,110.41c-6.84,3.48-15.17,6.56-24.66,9.12-19.03,5.13-42.74,8.18-68.44,8.19-25.71-.01-49.41-3.06-68.44-8.19-9.5-2.56-17.83-5.64-24.66-9.12-.89-.45-1.94.2-1.94,1.2v30.59c0,.65.53,1.18,1.18,1.18h187.74c.65,0,1.18-.53,1.18-1.18v-30.59c0-1-1.05-1.65-1.94-1.2Z"/>
+  <ellipse class="cls-6" cx="255.92" cy="182.57" rx="88.18" ry="69.65"/>
+  <path class="cls-3" d="M265.95,61.59h-21.5c2.66,6.71,0,12.53,0,12.53h21.5c-2.66-6.71,0-12.53,0-12.53Z"/>
+  <path class="cls-9" d="M286.93,66.01v13.92h-63.45v-13.92c2.39,1.6,5.4,3,8.87,4.15,6.35,2.11,14.27,3.36,22.86,3.36s16.5-1.25,22.86-3.36c3.47-1.15,6.48-2.56,8.87-4.15Z"/>
+  <circle class="cls-4" cx="255.31" cy="43.22" r="25.22"/>
+</svg>
